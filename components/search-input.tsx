@@ -1,20 +1,21 @@
-"use client";
+'use client';
 
-import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ChangeEventHandler, useEffect, useState } from "react";
-import { useDebounce } from "@/hooks/use-debounce";
-import queryString from "query-string";
+import { Search } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import queryString from 'query-string';
+import { ChangeEventHandler, useEffect, useState } from 'react';
+
+import { Input } from '@/components/ui/input';
+import { useDebounce } from '@/hooks/use-debounce';
 
 const SearchInput = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const categoryId = searchParams.get("categoryId");
-  const name = searchParams.get("name");
+  const categoryId = searchParams.get('categoryId');
+  const name = searchParams.get('name');
 
-  const [value, setValue] = useState(name || "");
+  const [value, setValue] = useState(name || '');
   const debouncedValue = useDebounce<string>(value);
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -32,7 +33,7 @@ const SearchInput = () => {
         url: window.location.href,
         query: query,
       },
-      { skipEmptyString: true, skipNull: true }
+      { skipEmptyString: true, skipNull: true },
     );
 
     router.push(url);

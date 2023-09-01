@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import React from "react";
-import { cn } from "@/lib/utils";
-import { Home, Plus, Settings } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { Home, Plus, Settings } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import React from 'react';
+
+import { cn } from '@/lib/utils';
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -12,20 +13,20 @@ const Sidebar = () => {
   const routes = [
     {
       icon: Home,
-      href: "/",
-      label: "Home",
+      href: '/',
+      label: 'Home',
       protectedRoute: false,
     },
     {
       icon: Plus,
-      href: "/compaion/new",
-      label: "Create",
+      href: '/compaion/new',
+      label: 'Create',
       protectedRoute: true,
     },
     {
       icon: Settings,
-      href: "/settings",
-      label: "Settings",
+      href: '/settings',
+      label: 'Settings',
       protectedRoute: true,
     },
   ];
@@ -44,8 +45,8 @@ const Sidebar = () => {
             <div
               key={route.label}
               className={cn(
-                "text-muted-foreground text-xs group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-primary hover:bg-primary/10 rounded-lg transition",
-                pathname == route.href && "bg-primary/10 text-primary"
+                'text-muted-foreground text-xs group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-primary hover:bg-primary/10 rounded-lg transition',
+                pathname == route.href && 'bg-primary/10 text-primary',
               )}
             >
               <div className="flex flex-col gap-y-2 items-center justify-center flex-1">

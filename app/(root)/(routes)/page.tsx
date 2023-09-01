@@ -1,10 +1,14 @@
-import SearchInput from "@/components/search-input";
-import { UserButton } from "@clerk/nextjs";
+import Categories from '@/components/Categories';
+import SearchInput from '@/components/search-input';
+import { getCategories } from '@/services/db';
 
-export default function RootPage() {
+export default async function RootPage() {
+  const categories = await getCategories();
+
   return (
-    <div className="h-full p-4 pl-8 space-y-2">
+    <div className="h-full p-4 pl-4 space-y-2">
       <SearchInput />
+      {categories && <Categories data={categories} />}
     </div>
   );
 }

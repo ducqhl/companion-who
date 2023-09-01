@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { Sparkles } from "lucide-react";
-import { Poppins } from "next/font/google";
-import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
+import { Sparkles } from 'lucide-react';
+import { Poppins } from 'next/font/google';
+import Link from 'next/link';
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/mode-toggle";
-import MobileSidebar from "@/components/mobile-sidebar";
+import MobileSidebar from '@/components/mobile-sidebar';
+import { ModeToggle } from '@/components/mode-toggle';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { UserButton } from '@clerk/nextjs';
 
 const font = Poppins({
-  weight: "600",
-  subsets: ["latin"],
+  weight: '600',
+  subsets: ['latin'],
 });
 
 export const Navbar = () => {
@@ -23,8 +23,8 @@ export const Navbar = () => {
         <Link href="/">
           <h1
             className={cn(
-              "hidden md:block text-xl md:text-3xl font-bold text-primary",
-              font.className
+              'hidden md:block text-xl md:text-3xl font-bold text-primary',
+              font.className,
             )}
           >
             companion.ai
