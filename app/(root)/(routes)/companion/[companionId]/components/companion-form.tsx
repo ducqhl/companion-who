@@ -1,6 +1,8 @@
 'use client';
 
+import axios from 'axios';
 import { Wand2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -25,6 +27,7 @@ import {
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Category, Companion } from '@prisma/client';
 
@@ -56,7 +59,7 @@ const formSchema = z.object({
     .string()
     .min(200, { message: 'Instructions require at least 200 characters' }),
   seed: z.string().min(200, { message: 'Seed require at least 200 character' }),
-  src: z.string().min(200, { message: 'Image is required' }),
+  src: z.string().min(1, { message: 'Image is required' }),
   categoryId: z.string().min(1, { message: 'Category is required' }),
 });
 
@@ -65,10 +68,14 @@ const defaultInitValue = {
   description: '',
   instructions: '',
   seed: '',
+  src: '',
   categoryId: undefined,
 };
 
 const CompanionForm = ({ initialData, categories }: CompanionFormProps) => {
+  const { toast } = useToast();
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || defaultInitValue,
@@ -77,7 +84,28 @@ const CompanionForm = ({ initialData, categories }: CompanionFormProps) => {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      if (initialData) {
+        // Update companion details
+        await axios.patch(`/api/companion/${initialData.id}`, values);
+      } else {
+        // Create new companion
+        await axios.post('/api/companion', values);
+      }
+
+      toast({
+        description: 'Success',
+      });
+
+      router.refresh();
+      router.push('/');
+    } catch (error) {
+      console.error('Something went wrong when submitting companion: ', error);
+      toast({
+        variant: 'destructive',
+        description: 'Something went wrong',
+      });
+    }
   };
 
   return (
@@ -247,7 +275,7 @@ const CompanionForm = ({ initialData, categories }: CompanionFormProps) => {
           <div className="w-full flex justify-center">
             <Button size="lg" disabled={isLoading}>
               {initialData ? 'Edit your companion' : 'Create your companion'}
-              <Wand2 />
+              <Wand2 className="w-4 h-4 ml-2" />
             </Button>
           </div>
         </form>

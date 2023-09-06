@@ -34,6 +34,7 @@ const ImageUpload = ({ value, onChange, disabled }: ImageUploadProps) => {
           <div className="relative h-40 w-40">
             <Image
               fill
+              sizes="40"
               alt="upload"
               src={value || '/placeholder.svg'}
               className="rounded-lg object-cover"

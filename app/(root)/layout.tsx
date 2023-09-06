@@ -1,4 +1,3 @@
-import MobileSidebar from '@/components/mobile-sidebar';
 import { Navbar } from '@/components/navbar';
 import Sidebar from '@/components/sidebar';
 
