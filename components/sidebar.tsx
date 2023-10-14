@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 
 import { cn } from '@/lib/utils';
+import ROUTES from '@/utils/routes';
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -13,19 +14,19 @@ const Sidebar = () => {
   const routes = [
     {
       icon: Home,
-      href: '/',
+      href: ROUTES.ROOT,
       label: 'Home',
       protectedRoute: false,
     },
     {
       icon: Plus,
-      href: '/compaion/new',
+      href: ROUTES.CREATE_COMPANION,
       label: 'Create',
       protectedRoute: true,
     },
     {
       icon: Settings,
-      href: '/settings',
+      href: ROUTES.SETTINGS,
       label: 'Settings',
       protectedRoute: true,
     },
@@ -43,6 +44,7 @@ const Sidebar = () => {
         <div className="space-y-2 w-full">
           {routes.map((route) => (
             <div
+              onClick={() => onNavigation(route.href, route.protectedRoute)}
               key={route.label}
               className={cn(
                 'text-muted-foreground text-xs group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-primary hover:bg-primary/10 rounded-lg transition',

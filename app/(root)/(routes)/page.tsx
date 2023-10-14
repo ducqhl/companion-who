@@ -1,5 +1,5 @@
-import Categories from '@/components/Categories';
-import Companions, { CompanionsType } from '@/components/Companions';
+import Categories from '@/components/categories';
+import Companions, { CompanionsType } from '@/components/companions';
 import SearchInput from '@/components/search-input';
 import { getCategories, getCompanions } from '@/services/db';
 

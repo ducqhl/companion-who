@@ -3,6 +3,8 @@ Frameworks:
 - NextJS 13
 - Prisma
 
+UI:
+- shadcn-ui@latest
 DB: PlanetScale
 
 

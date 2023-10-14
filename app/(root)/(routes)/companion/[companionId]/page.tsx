@@ -22,6 +22,7 @@ const CompanionIdPage = async ({ params }: CompanionIdPageProps) => {
   const companion = await getCompanion({
     where: {
       id: params.companionId,
+      userId,
     },
   });
   const categories = await getCategories();

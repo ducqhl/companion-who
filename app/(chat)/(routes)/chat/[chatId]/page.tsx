@@ -4,7 +4,7 @@ import React from 'react';
 import { getCompanion } from '@/services/db';
 import { auth, redirectToSignIn } from '@clerk/nextjs';
 
-import ChatClient from './components/chat-client';
+import ChatClient from './components/client';
 
 interface ChatIdPageProps {
   params: {
